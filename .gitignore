@@ -1,0 +1,10 @@
+# Source files live only on the local machine. The one tracked file lists their names.
+sources/*
+!sources/README.md
+
+# OS and editor files
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.obsidian/
