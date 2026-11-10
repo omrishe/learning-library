@@ -353,4 +353,4 @@ DDIA = Martin Kleppmann and Chris Riccomini, *Designing Data-Intensive Applicati
 
 ## Related
 
-None yet.
+- [Passing IDs between services](../distributed-systems/passing-ids-between-services.md): message IDs for deduplicating at-least-once deliveries, an application of the idempotency ideas here.

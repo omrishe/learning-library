@@ -8,6 +8,7 @@ Rules for adding entries are in [AGENTS.md](AGENTS.md). Every entry follows [the
 
 ## Recent additions
 
+- 2026-11-10: [Passing IDs between services](questions/distributed-systems/passing-ids-between-services.md)
 - 2026-11-10: [Error handling that depends on message text instead of error codes](questions/architecture/error-handling-by-message-text.md)
 - 2026-11-10: [Stale cache reads while a DB write's outcome is unknown](questions/caching/stale-cache-after-ambiguous-db-write.md)
 
@@ -23,7 +24,7 @@ Rules for adding entries are in [AGENTS.md](AGENTS.md). Every entry follows [the
 
 ### Distributed systems
 
-*No entries yet.*
+- [Passing IDs between services](questions/distributed-systems/passing-ids-between-services.md): entity IDs, correlation (trace) IDs and message IDs, and how each should travel between services. *intermediate · draft*
 
 ### ASP.NET Core
 
