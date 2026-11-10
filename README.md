@@ -1,4 +1,4 @@
-# Learning Library: תוכן עניינים
+# Learning Library: Table Of Contents
 
 Deep-dive notes on problems and questions I hit while programming, mostly in C# and ASP.NET Core. Each entry explains why the problem happens, the realistic options and their tradeoffs, what the industry does, and where to read more.
 
