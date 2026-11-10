@@ -8,6 +8,7 @@ Rules for adding entries are in [AGENTS.md](AGENTS.md). Every entry follows [the
 
 ## Recent additions
 
+- 2026-11-10: [Error handling that depends on message text instead of error codes](questions/architecture/error-handling-by-message-text.md)
 - 2026-11-10: [Stale cache reads while a DB write's outcome is unknown](questions/caching/stale-cache-after-ambiguous-db-write.md)
 
 ## Topics
@@ -34,7 +35,7 @@ Rules for adding entries are in [AGENTS.md](AGENTS.md). Every entry follows [the
 
 ### Architecture
 
-*No entries yet.*
+- [Error handling that depends on message text instead of error codes](questions/architecture/error-handling-by-message-text.md): why errors created as sentences break translation, UI logic and stored data, and how stable error codes with Problem Details fix it. *intermediate · draft*
 
 ### Testing
 
