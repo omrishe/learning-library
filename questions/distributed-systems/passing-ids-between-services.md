@@ -368,4 +368,5 @@ In production, record the message ID in the same database transaction as the cha
 
 ## Related
 
+- [Passing IDs between the frontend and the backend](../aspnet-core/passing-ids-between-frontend-and-backend.md): the same question at the browser boundary, where precision and authorization dominate.
 - [Stale cache reads while a DB write's outcome is unknown](../caching/stale-cache-after-ambiguous-db-write.md): idempotency keys and at-least-once delivery, which the message-ID section relies on.

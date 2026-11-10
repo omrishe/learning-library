@@ -8,6 +8,7 @@ Rules for adding entries are in [AGENTS.md](AGENTS.md). Every entry follows [the
 
 ## Recent additions
 
+- 2026-11-10: [Passing IDs between the frontend and the backend](questions/aspnet-core/passing-ids-between-frontend-and-backend.md)
 - 2026-11-10: [Passing IDs between services](questions/distributed-systems/passing-ids-between-services.md)
 - 2026-11-10: [Error handling that depends on message text instead of error codes](questions/architecture/error-handling-by-message-text.md)
 - 2026-11-10: [Stale cache reads while a DB write's outcome is unknown](questions/caching/stale-cache-after-ambiguous-db-write.md)
@@ -28,7 +29,7 @@ Rules for adding entries are in [AGENTS.md](AGENTS.md). Every entry follows [the
 
 ### ASP.NET Core
 
-*No entries yet.*
+- [Passing IDs between the frontend and the backend](questions/aspnet-core/passing-ids-between-frontend-and-backend.md): JSON precision for 64-bit IDs, where IDs go in a request, IDOR/BOLA, and int vs GUID vs public IDs. *intermediate · draft*
 
 ### C#
 
