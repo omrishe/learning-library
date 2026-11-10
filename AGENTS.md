@@ -30,7 +30,7 @@ When the owner reviews an entry and approves it, set `status: reviewed` and upda
 
 - **One entry per problem or question.** An entry pulls in whatever concepts it needs. Split a concept into its own entry only when a second entry needs it too; then both link to it.
 - **Depth over breadth.** Explain the mechanism (what actually happens, step by step, in time order) before the fix. A timeline or Mermaid diagram usually helps.
-- **Options, not a single answer.** Each option gets pros, cons, and when to use it, tied to a realistic C#/ASP.NET app. End the section with a recommendation and what it costs.
+- **Options, not a single answer.** Give at least 3 realistic options. Each gets a grade from 1 to 10, pros, cons, and when to use it, tied to a realistic C#/ASP.NET app. The grade scale is defined in the template. End the section with a grade table and a recommendation, including what it costs.
 - **Name the concepts.** Use the industry name of every pattern and anti-pattern, so the owner can search for it.
 - **English** throughout. The only Hebrew is the index heading.
 - **Code examples** are C# on current LTS .NET with ASP.NET Core, and state the .NET version. Use pseudocode only when the idea is language-independent. Keep examples short, compilable in spirit, and focused on the concept.

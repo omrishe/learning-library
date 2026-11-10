@@ -104,6 +104,7 @@ A timeout isn't the only way to get stale data:
 
 Put the cache delete in a `finally` block, so it runs on success, failure and timeout. Deleting is **idempotent**, so an extra delete only costs one cache miss. Facebook chose delete-on-write over update-on-write for this reason [11]. Give every entry a TTL, so any stale value that slips through dies within a known time.
 
+- **Grade:** 9/10. The default: almost free, and it fixes the most common bug, but it only bounds staleness instead of preventing it.
 - **Pros:** Two lines of code. It fixes the most common real bug (an exception skipping invalidation). Your staleness has a known upper bound, the TTL.
 - **Cons:** It doesn't close the race in mechanism 4 or the late-commit case. It only bounds them. If the cache itself is down when you delete, you're back to relying on the TTL.
 - **Use when:** Always. This is the baseline for any cache-aside code.
@@ -116,6 +117,7 @@ This answers "did it commit?" for the database side. You either retry safely, or
 - **Idempotency keys.** The client generates a unique request ID, the server stores it under a unique constraint, and a retry with the same ID becomes a no-op or returns the original result [5][14][15]. EF Core's docs suggest client-generated GUID keys for exactly this reason: a retried insert then fails on the duplicate key instead of creating a second row [10].
 - **Verify before retrying.** EF Core's `ExecuteInTransactionAsync` takes a `verifySucceeded` callback, and the docs also describe a tracking-row approach [10].
 
+- **Grade:** 8/10. Essential whenever writes can be retried, but on its own it does nothing for the cache.
 - **Pros:** It fixes the "did my write happen?" question at its root, and makes automatic retries safe. EF Core's `EnableRetryOnFailure` retries a failed commit as if it rolled back, which can duplicate rows when it actually committed [10].
 - **Cons:** It doesn't touch the cache at all, so you still need Option 1. Idempotency keys need storage and a cleanup policy.
 - **Use when:** Any write that can be retried by your code, a library such as EF Core's execution strategy, or a user pressing "Save" again. That covers almost every write.
@@ -127,6 +129,7 @@ Stop asking the request to invalidate the cache. Instead, invalidate when the da
 - **Transactional outbox.** In the same transaction as the update, insert an "invalidate product:42" row into an `outbox` table. A background worker reads the outbox and deletes the cache keys [4][12]. The invalidation exists if and only if the data change committed.
 - **Change data capture (CDC).** A tool such as Debezium reads the database's transaction log and emits a change event per row [13]. A consumer deletes the matching cache keys. Facebook does this at scale: daemons read committed SQL and broadcast deletes [11].
 
+- **Grade:** 7/10. The only option that follows the real commit, but it costs infrastructure and is still asynchronous.
 - **Pros:** It closes the late-commit case, because invalidation follows the real commit, whenever it happens. It also removes the partial-failure half of the dual-write problem, since the database decides the order of changes [4].
 - **Cons:** It needs more infrastructure: a worker, and for CDC, Kafka Connect or similar. It's still **asynchronous**, so readers can see stale data for a short lag [4]. Delivery is at least once [12][13], so consumers must be idempotent. Cache deletes already are.
 - **Use when:** Staleness after a write is costly (prices, permissions, stock), several services cache the same data, or you already run an outbox for events.
@@ -135,6 +138,7 @@ Stop asking the request to invalidate the cache. Instead, invalidate when the da
 
 Facebook's **leases** give a reader a token on a cache miss. A delete for that key invalidates the token, so the reader's later "set the old value" is rejected [11]. This closes the race in mechanism 4. Because a token is handed out at most once every 10 seconds per key, leases also damp **thundering herds**: in Facebook's measurements, peak DB load for a hot key dropped from 17K to 1.3K requests per second [11].
 
+- **Grade:** 4/10. It solves the exact race, but you'd have to build it yourself on Redis or HybridCache.
 - **Pros:** It targets the exact race that TTLs only bound.
 - **Cons:** Redis and HybridCache don't provide this out of the box. You'd build it yourself, for example with versioned values and a compare-and-set script **[unverified]**: no primary source for a specific Redis implementation was checked. It's real complexity.
 - **Use when:** High read traffic on keys that are written often, and stale sets are actually observed.
@@ -143,13 +147,22 @@ Facebook's **leases** give a reader a token on a cache miss. A delete for that k
 
 For the user who made the change, read from the database (not the cache) for a short window after their write. DDIA describes this for replicas as **reading your own writes** [6]. For data that must always be fresh, don't cache it, or use a very short TTL.
 
+- **Grade:** 6/10. Great for the editor's own view, but narrow: other users still see the cache.
 - **Pros:** The person most likely to notice ("I just changed it!") always sees the truth. It's simple to reason about.
 - **Cons:** It doesn't help other users. It adds DB load and needs per-user tracking of their last write.
 - **Use when:** Admin screens, settings pages, and anything where the editor immediately views the result.
 
 ### Recommendation
 
-In a typical ASP.NET Core app, start with **Option 1 + Option 2**:
+| Option | Grade | Best for |
+| --- | --- | --- |
+| 1. Always delete + short TTLs | 9/10 | Every cache-aside setup, as the baseline |
+| 2. Idempotent writes | 8/10 | Any write that can be retried |
+| 3. Outbox or CDC invalidation | 7/10 | Data where staleness is costly, or several services cache it |
+| 5. Read your own writes / skip cache | 6/10 | Edit screens where the editor checks the result |
+| 4. Leases or versions | 4/10 | Hot keys where stale sets are actually observed |
+
+The options combine rather than compete. In a typical ASP.NET Core app, start with **Option 1 + Option 2**:
 - invalidate in `finally`;
 - set TTLs that match how stale each kind of data may be;
 - use set-style or idempotency-keyed writes so retries are safe.

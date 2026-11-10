@@ -24,19 +24,38 @@ updated: <YYYY-MM-DD>
 
 ## Options and solutions
 
-<!-- 2-5 realistic options. For each one: -->
+<!-- At least 3 realistic options. Each gets a grade from 1 to 10 for how well it fits a typical ASP.NET Core app facing this problem: 9-10 = default choice, 6-8 = good in the right situation, 3-5 = niche or costly, 1-2 = avoid. Give the reason for the grade in one line. -->
 
 ### Option 1: <name>
 
 <!-- How it works, in a few sentences. -->
 
+- **Grade:** <n>/10. <One-line reason.>
+- **Pros:**
+- **Cons:**
+- **Use when:**
+
+### Option 2: <name>
+
+- **Grade:** <n>/10. <One-line reason.>
+- **Pros:**
+- **Cons:**
+- **Use when:**
+
+### Option 3: <name>
+
+- **Grade:** <n>/10. <One-line reason.>
 - **Pros:**
 - **Cons:**
 - **Use when:**
 
 ### Recommendation
 
-<!-- Which option to start with in a typical ASP.NET Core app, why, and what you give up. -->
+<!-- Start with a table of every option, highest grade first. Then: which option or combination to start with, why, and what you give up. -->
+
+| Option | Grade | Best for |
+| --- | --- | --- |
+| <name> | <n>/10 | <situation> |
 
 ## What the industry does
 
