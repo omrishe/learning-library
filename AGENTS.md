@@ -6,7 +6,7 @@ This repo is **public**. Everything committed is visible to the world.
 
 ## Layout
 
-- `README.md`: the main index (תוכן עניינים). Every entry is listed here.
+- `README.md`: the main index (table of contents). Every entry is listed here.
 - `questions/<topic>/<entry-slug>.md`: all entries live under `questions/`, one entry per file, grouped by topic folder.
 - `_templates/entry-template.md`: the template every entry follows. Read it before writing an entry.
 - `sources/README.md`: the list of source files available locally. The files themselves are local-only and untracked.
@@ -32,7 +32,7 @@ When the owner reviews an entry and approves it, set `status: reviewed` and upda
 - **Depth over breadth.** Explain the mechanism (what actually happens, step by step, in time order) before the fix. A timeline or Mermaid diagram usually helps.
 - **Options, not a single answer.** Give at least 3 realistic options. Each gets a grade from 1 to 10, pros, cons, and when to use it, tied to a realistic C#/ASP.NET app. The grade scale is defined in the template. End the section with a grade table and a recommendation, including what it costs.
 - **Name the concepts.** Use the industry name of every pattern and anti-pattern, so the owner can search for it.
-- **English** throughout. The only Hebrew is the index heading.
+- **English** throughout, including headings. When a problem involves text in another language, describe it in English or use a placeholder such as `<Hebrew sentence>`.
 - **Code examples** are C# on current LTS .NET with ASP.NET Core, and state the .NET version. Use pseudocode only when the idea is language-independent. Keep examples short, compilable in spirit, and focused on the concept.
 
 ## Topics
