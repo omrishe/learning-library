@@ -1,11 +1,12 @@
 ---
 title: Error handling that depends on message text instead of error codes
+parent: Architecture
 topics: [architecture, aspnet-core, csharp]
 tags: [error-codes, problem-details, rfc-9457, localization, i18n, stringly-typed, primitive-obsession, connascence-of-meaning, api-contract]
 difficulty: intermediate
 status: draft
 added: 2026-11-10
-updated: 2026-11-10
+updated: 2026-11-11
 ---
 
 # Error handling that depends on message text instead of error codes
@@ -394,4 +395,4 @@ public void Every_error_code_has_a_Hebrew_translation()
 
 ## Related
 
-None yet.
+- [SOLID: what the five principles mean and when they help or hurt](../best-practices/principles/solid-principles.md): the same idea at the level of code design. Depending on a stable, named contract instead of a hidden detail (here, message wording) is what the Dependency Inversion Principle asks for.

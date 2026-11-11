@@ -1,11 +1,12 @@
 ---
 title: Stale cache reads while a DB write's outcome is unknown
+parent: Caching
 topics: [caching, databases, distributed-systems]
 tags: [cache-aside, cache-invalidation, dual-writes, timeouts, idempotency, change-data-capture, transactional-outbox]
 difficulty: intermediate
 status: draft
 added: 2026-11-10
-updated: 2026-11-10
+updated: 2026-11-11
 ---
 
 # Stale cache reads while a DB write's outcome is unknown
@@ -354,3 +355,4 @@ DDIA = Martin Kleppmann and Chris Riccomini, *Designing Data-Intensive Applicati
 ## Related
 
 - [Passing IDs between services](../distributed-systems/passing-ids-between-services.md): message IDs for deduplicating at-least-once deliveries, an application of the idempotency ideas here.
+- [ACID: what a database transaction actually guarantees](../best-practices/principles/acid-transactions.md): what a single database transaction does and doesn't promise, including isolation levels and lost updates, and why its guarantees stop at the database boundary, which is where this entry's problem starts.

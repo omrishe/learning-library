@@ -1,5 +1,6 @@
 ---
 title: <Short title naming the problem>
+parent: <Topic page title, e.g. Caching. Must match the title in questions/<topic>/index.md>
 topics: [<primary-topic>, <other-topic>]
 tags: [<concept-name>, <concept-name>]
 difficulty: <beginner | intermediate | advanced>

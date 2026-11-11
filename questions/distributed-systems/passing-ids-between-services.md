@@ -1,11 +1,12 @@
 ---
 title: Passing IDs between services
+parent: Distributed systems
 topics: [distributed-systems, architecture, aspnet-core]
 tags: [entity-id, correlation-id, distributed-tracing, w3c-trace-context, traceparent, activity, baggage, strongly-typed-ids, data-sovereignty, message-id, cloudevents]
 difficulty: intermediate
 status: draft
 added: 2026-11-10
-updated: 2026-11-10
+updated: 2026-11-11
 ---
 
 # Passing IDs between services
@@ -370,3 +371,4 @@ In production, record the message ID in the same database transaction as the cha
 
 - [Passing IDs between the frontend and the backend](../aspnet-core/passing-ids-between-frontend-and-backend.md): the same question at the browser boundary, where precision and authorization dominate.
 - [Stale cache reads while a DB write's outcome is unknown](../caching/stale-cache-after-ambiguous-db-write.md): idempotency keys and at-least-once delivery, which the message-ID section relies on.
+- [ACID: what a database transaction actually guarantees](../best-practices/principles/acid-transactions.md): the atomicity that lets a processed message ID and the change it guards commit together.

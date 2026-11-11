@@ -1,0 +1,58 @@
+# Builds the Jekyll site and deploys it to GitHub Pages.
+# Based on the official just-the-docs-template workflow.
+# Requires: Settings > Pages > Build and deployment > Source = "GitHub Actions".
+name: Deploy Jekyll site to Pages
+
+on:
+  push:
+    branches: ["main"]
+  # Lets you run the workflow by hand from the Actions tab.
+  workflow_dispatch:
+
+# Least privilege: read the repo, deploy to Pages, and request an OIDC token
+# that proves the deployment comes from this repository's workflow.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one deployment at a time; a newer push cancels an older, still-running one.
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  # Job 1: turn the Markdown into a folder of HTML (_site/) and package it as an artifact.
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true # runs 'bundle install' from Gemfile.lock and caches the gems
+          cache-version: 0    # increment to force a fresh gem download
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v6
+      - name: Build with Jekyll
+        # base_path is "/learning-library" for this project site.
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        env:
+          JEKYLL_ENV: production
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5 # uploads ./_site by default
+
+  # Job 2: publish the artifact. Runs only after build succeeds.
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

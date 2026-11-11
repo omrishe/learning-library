@@ -1,0 +1,55 @@
+# Jekyll + Just the Docs configuration for the GitHub Pages site.
+# Site: https://omrishe.github.io/learning-library/
+
+title: Learning Library
+description: Deep-dive notes on programming problems, mostly C# and ASP.NET Core.
+theme: just-the-docs
+url: https://omrishe.github.io
+# baseurl (/learning-library) is passed by the Pages workflow with --baseurl, so it is not set here.
+
+plugins:
+  - jekyll-relative-links
+
+relative_links:
+  enabled: true
+
+# Front matter defaults: every page gets the theme's "default" layout (sidebar + content)
+# without each file having to say `layout: default`. Without this, pages render as bare HTML.
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+# Client-side search (lunr.js) over a JSON index generated at build time.
+search_enabled: true
+
+# Mermaid is opt-in in Just the Docs. Pinned so diagrams don't change with upstream releases.
+mermaid:
+  version: "11.4.1"
+
+# Links in the top-right corner of every page.
+aux_links:
+  "View on GitHub": https://github.com/omrishe/learning-library
+
+# "Back to top" link at the bottom of long pages.
+back_to_top: true
+back_to_top_text: "Back to top"
+
+# "Edit this page on GitHub" link at the bottom of every page.
+gh_edit_link: true
+gh_edit_link_text: "Edit this page on GitHub"
+gh_edit_repository: https://github.com/omrishe/learning-library
+gh_edit_branch: main
+gh_edit_view_mode: tree
+
+# Files that exist for contributors (people and AI agents), not for readers of the site.
+# Folders starting with _ (like _templates/) are skipped by Jekyll automatically.
+exclude:
+  - AGENTS.md
+  - CLAUDE.md
+  - sources/
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .jekyll-cache/

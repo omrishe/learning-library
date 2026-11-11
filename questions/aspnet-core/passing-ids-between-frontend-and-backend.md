@@ -1,5 +1,6 @@
 ---
 title: Passing IDs between the frontend and the backend
+parent: ASP.NET Core
 topics: [aspnet-core, architecture]
 tags: [json-number-precision, max-safe-integer, idor, bola, resource-based-authorization, uuid, uuidv7, public-id, enumeration-attack, parameter-binding]
 difficulty: intermediate

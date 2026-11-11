@@ -7,9 +7,11 @@ This repo is **public**. Everything committed is visible to the world.
 ## Layout
 
 - `README.md`: the main index (table of contents). Every entry is listed here.
-- `questions/<topic>/<entry-slug>.md`: all entries live under `questions/`, one entry per file, grouped by topic folder.
+- `questions/<topic>/<entry-slug>.md`: all entries live under `questions/`, one entry per file, grouped by topic folder (or `questions/<topic>/<subtopic>/<entry-slug>.md` inside a subtopic).
 - `_templates/entry-template.md`: the template every entry follows. Read it before writing an entry.
 - `sources/README.md`: the list of source files available locally. The files themselves are local-only and untracked.
+- `questions/<topic>/index.md`: the topic's landing page on the website. Its `title` is what entries reference as `parent`.
+- `_config.yml`, `Gemfile`, `Gemfile.lock`, `.github/workflows/pages.yml`: the website build (see *Website*).
 
 ## Adding an entry
 
@@ -19,7 +21,7 @@ The owner gives you a problem or question, usually in a sentence or two. You wri
 2. **Check for overlap.** Search existing entries (`README.md` and `grep`). If an entry already covers this problem, extend that entry instead of creating a new one. Done when you have either a new slug or a target entry to extend.
 3. **Pick topic and slug.** Choose the primary topic from *Topics*. Slug is lowercase kebab-case describing the problem, e.g. `stale-cache-after-ambiguous-db-write`. Done when the path `questions/<topic>/<slug>.md` is decided and free.
 4. **Research.** Follow *Research and citations*. Done when every factual claim you plan to make has a source, or you have marked it unverified.
-5. **Write.** Copy `_templates/entry-template.md` and fill every section. Set `status: draft`. Done when all ten sections have real content and no template guidance comments remain.
+5. **Write.** Copy `_templates/entry-template.md` and fill every section. Set `status: draft`, and set `parent:` to the exact `title` of `questions/<topic>/index.md`. Done when all ten sections have real content and no template guidance comments remain.
 6. **Link.** Add the entry to the right topic section of `README.md` and to the top of *Recent additions* (keep the 10 newest). Add reciprocal links in the *Related* section of any entry you linked to. Done when every link in both directions resolves to an existing file.
 7. **Safety check.** Run the *Public-repo safety* check over the diff. Done when it is clean.
 8. **Hand to the owner for review.** Commit only when the owner asks; push only when the owner asks.
@@ -39,9 +41,22 @@ When the owner reviews an entry and approves it, set `status: reviewed` and upda
 
 Topic folders live under `questions/` and are created only when the first entry needs them. Use an existing topic whenever one fits; an entry has one primary folder and can list more in its `topics:` metadata.
 
-`databases`, `caching`, `distributed-systems`, `aspnet-core`, `csharp`, `architecture`, `testing`, `devops`
+`databases`, `caching`, `distributed-systems`, `aspnet-core`, `csharp`, `architecture`, `testing`, `devops`, `best-practices`
 
-To add a topic, add it to this list and add its section to `README.md` in the same change.
+A topic can have **subtopics**: a subfolder `questions/<topic>/<subtopic>/` with its own `index.md` whose `parent` is the topic's title. Entries in it set `parent` to the subtopic's title. Current subtopics: `best-practices/principles` (title `Principles`).
+
+To add a topic, add it to this list, add its section to `README.md`, and create `questions/<topic>/index.md` (with `title` and `nav_order`, following the gaps of 10 used by the existing topics) in the same change.
+
+## Website
+
+The repo is published as a GitHub Pages site built with Jekyll and the Just the Docs theme. Every push to `main` rebuilds it through `.github/workflows/pages.yml`.
+
+- **Sidebar:** built from front matter. A page appears when it has a `title`; it nests under the page whose `title` equals its `parent`.
+- **Topic titles are identifiers.** Entries find their topic by matching its `title` text, so renaming a topic page's `title` silently drops its entries from the sidebar. If a rename is unavoidable, update every entry's `parent` in the same change.
+- **Titles must be unique** among pages that share a parent.
+- **Liquid:** Jekyll treats `{{ ... }}` and `{% ... %}` as template code, even inside code blocks. Wrap such text in `{% raw %}` ... `{% endraw %}`.
+- **Links:** keep relative links to `.md` files; the build rewrites them. Link to files excluded from the site (`AGENTS.md`, `_templates/`) with full GitHub URLs.
+- **Local preview:** `bundle exec jekyll serve` with Ruby installed, or the same command inside a `ruby:3.3` Docker container.
 
 ## Research and citations
 
