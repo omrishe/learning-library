@@ -395,4 +395,6 @@ public void Every_error_code_has_a_Hebrew_translation()
 
 ## Related
 
+- [Changing a contract in an established project without breaking consumers](changing-contracts-in-an-established-project.md): error codes are part of the API contract, so adding, renaming or removing one follows the expand → migrate → contract rules there.
 - [SOLID: what the five principles mean and when they help or hurt](../best-practices/principles/solid-principles.md): the same idea at the level of code design. Depending on a stable, named contract instead of a hidden detail (here, message wording) is what the Dependency Inversion Principle asks for.
+- [Keeping a project's decisions and conventions findable by AI assistants and new developers](../best-practices/documenting-project-decisions-for-ai-and-new-developers.md): choosing error codes over message text is the kind of cross-cutting decision worth recording as an ADR, so it is not re-litigated.

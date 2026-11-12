@@ -16,6 +16,8 @@ Rules for adding entries are in [AGENTS.md](https://github.com/omrishe/learning-
 
 ## Recent additions
 
+- 2026-11-12: [Changing a contract in an established project without breaking consumers](questions/architecture/changing-contracts-in-an-established-project.md)
+- 2026-11-12: [Keeping a project's decisions and conventions findable by AI assistants and new developers](questions/best-practices/documenting-project-decisions-for-ai-and-new-developers.md)
 - 2026-11-11: [ACID: what a database transaction actually guarantees](questions/best-practices/principles/acid-transactions.md)
 - 2026-11-11: [SOLID: what the five principles mean and when they help or hurt](questions/best-practices/principles/solid-principles.md)
 - 2026-11-10: [Passing IDs between the frontend and the backend](questions/aspnet-core/passing-ids-between-frontend-and-backend.md)
@@ -47,6 +49,7 @@ Rules for adding entries are in [AGENTS.md](https://github.com/omrishe/learning-
 
 ### Architecture
 
+- [Changing a contract in an established project without breaking consumers](questions/architecture/changing-contracts-in-an-established-project.md): why a rename that compiles can still break deployed consumers, and five ways to change a contract (additive-only, expand/migrate/contract, versioning, adapters, lockstep release). *intermediate · draft*
 - [Error handling that depends on message text instead of error codes](questions/architecture/error-handling-by-message-text.md): why errors created as sentences break translation, UI logic and stored data, and how stable error codes with Problem Details fix it. *intermediate · draft*
 
 ### Testing
@@ -58,6 +61,8 @@ Rules for adding entries are in [AGENTS.md](https://github.com/omrishe/learning-
 *No entries yet.*
 
 ### Best practices
+
+- [Keeping a project's decisions and conventions findable by AI assistants and new developers](questions/best-practices/documenting-project-decisions-for-ai-and-new-developers.md): seven ways to record conventions and the reasons behind decisions (AGENTS.md, ADRs, scoped rules, specs, docs-as-code, tooling), and why a short hand-written map plus ADRs plus automated checks is the usual starting point. *intermediate · draft*
 
 #### Principles
 

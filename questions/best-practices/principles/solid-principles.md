@@ -443,3 +443,4 @@ Each rule obeys the same contract: it returns a non-negative discount and doesn'
 ## Related
 
 - [Error handling that depends on message text instead of error codes](../../architecture/error-handling-by-message-text.md): another coupling problem; replacing a hidden dependency on wording with a stable, named contract follows the same idea as depending on abstractions.
+- [Keeping a project's decisions and conventions findable by AI assistants and new developers](../documenting-project-decisions-for-ai-and-new-developers.md): where to record which principles a project follows, and why, so they are applied consistently.
