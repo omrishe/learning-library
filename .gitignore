@@ -2,6 +2,9 @@
 sources/*
 !sources/README.md
 
+# Private decisions and project-specific notes. Never committed, never published.
+private/
+
 # OS and editor files
 Thumbs.db
 desktop.ini

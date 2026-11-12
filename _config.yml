@@ -49,6 +49,7 @@ exclude:
   - AGENTS.md
   - CLAUDE.md
   - sources/
+  - private/
   - Gemfile
   - Gemfile.lock
   - vendor/

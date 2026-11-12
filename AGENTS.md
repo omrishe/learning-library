@@ -10,6 +10,7 @@ This repo is **public**. Everything committed is visible to the world.
 - `questions/<topic>/<entry-slug>.md`: all entries live under `questions/`, one entry per file, grouped by topic folder (or `questions/<topic>/<subtopic>/<entry-slug>.md` inside a subtopic).
 - `_templates/entry-template.md`: the template every entry follows. Read it before writing an entry.
 - `sources/README.md`: the list of source files available locally. The files themselves are local-only and untracked.
+- `private/`: the owner's local-only notes and decisions, ignored by git. If it exists, read it before making decisions about the library's structure or process. Search tools skip it because it is gitignored, so open it by path. Never copy its contents into a tracked file (see *Public-repo safety*).
 - `questions/<topic>/index.md`: the topic's landing page on the website. Its `title` is what entries reference as `parent`.
 - `_config.yml`, `Gemfile`, `Gemfile.lock`, `.github/workflows/pages.yml`: the website build (see *Website*).
 
@@ -74,6 +75,7 @@ Before every commit, check the diff for:
 - **Employer specifics:** company, product, client, team, or internal service names; internal URLs; real table, queue, or endpoint names. Replace with generic ones (`OrdersService`, `orders` table).
 - **Secrets:** connection strings, keys, tokens, passwords, hostnames, IPs.
 - **Source files:** only `sources/README.md` is tracked under `sources/`. `.gitignore` enforces this; keep it that way.
+- **Private folder:** nothing under `private/` is ever tracked, quoted, summarized or linked from a tracked file. Use what you learn there to guide your work, not as text for entries.
 
 Commits use the repo's local identity (`omrishe` with the GitHub noreply email), already configured in `.git/config`.
 
